@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { TaskStatus } from "./task.model";
 @Entity()
 export class Task extends BaseEntity {
@@ -7,11 +7,14 @@ export class Task extends BaseEntity {
     id: number;
 
     @Column()
-    title: string
+    title: string;
 
     @Column()
-    description: string
+    description: string;
 
     @Column()
-    status: TaskStatus
+    status: TaskStatus;
+
+    // @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
+    // createDateTime: Date;
 }
