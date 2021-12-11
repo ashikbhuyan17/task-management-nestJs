@@ -19,6 +19,7 @@ export class TasksService {
   //   return this.tasks;
   // }
   async getAllTasks(){
+    console.log(await this.taskRepository.find())
     return await this.taskRepository.find();
  
   }
