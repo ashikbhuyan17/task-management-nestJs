@@ -1,9 +1,12 @@
 /* eslint-disable prettier/prettier */
+import { type } from 'os';
+import { User } from 'src/auth/user.entity';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { TaskStatus } from './task-status.enum';
@@ -20,6 +23,9 @@ export class Task extends BaseEntity {
 
   @Column()
   status: TaskStatus;
+
+  @ManyToOne(type => User, user => user.tasks)
+  user:User;
 
   @CreateDateColumn({ type: 'timestamptz', default: () => 'CURRENT_TIMESTAMP' })
   createDateTime: Date;

@@ -1,4 +1,5 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+/* eslint-disable prettier/prettier */
+import { HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { createTaskDto } from './dto/create-task.dto';
 import { TaskStatus } from './task-status.enum';
@@ -17,7 +18,10 @@ export class TasksService {
   // getAllTasks(): Task[] {
   //   return this.tasks;
   // }
-
+  async getAllTasks(){
+    return await this.taskRepository.find();
+ 
+  }
 
 
   async getTaskById(id: number): Promise<Task> {
@@ -41,7 +45,7 @@ export class TasksService {
   //   }
   // }
 
-  async createTask(createTaskDto: createTaskDto): Promise<Task> {
+  async createTask(createTaskDto: createTaskDto): Promise<any> {
     // const { title, description } = createTaskDto;
     // const task = new Task();
     // task.title = title;
@@ -49,7 +53,13 @@ export class TasksService {
     // task.status = TaskStatus.OPEN;
     // await task.save();
     // return task;
-    return this.taskRepository.createTask(createTaskDto);
+    const users = this.taskRepository.createTask(createTaskDto);
+    return {
+      statusCode: HttpStatus.OK,
+      message: 'Users fetched successfully',
+      users
+    };
+    
   }
 
   //   createTask(title: string, description: string): Task {

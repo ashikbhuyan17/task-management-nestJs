@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { createTaskDto } from './dto/create-task.dto';
 import { TaskStatusValidationPipe } from './pipes/task-status-validation.pipes';
@@ -12,6 +13,11 @@ export class TasksController {
   // getAllTasks(): Task[] {
   //   return this.tasksService.getAllTasks();
   // }
+  @Get()
+  getAllTasks(){
+    return this.tasksService.getAllTasks()
+    
+  }
 
   @Get('/:id')
   getTaskById(@Param('id', ParseIntPipe) id: number): Promise<Task> {
@@ -81,7 +87,4 @@ export class TasksController {
     return this.tasksService.updateTaskStatus(id, status);
   }
 
-
-
-  
 }
